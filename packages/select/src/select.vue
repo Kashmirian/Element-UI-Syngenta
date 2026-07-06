@@ -130,6 +130,20 @@
             {{ emptyText }}
           </p>
         </template>
+        <div
+          class="el-select-dropdown__actions"
+          v-if="multiple && showSelectAll"
+          @mousedown.prevent
+          @click.stop="handleSelectAllChange">
+          <label class="el-checkbox">
+            <span
+              class="el-checkbox__input"
+              :class="{ 'is-checked': isSelectAllChecked }">
+              <span class="el-checkbox__inner"></span>
+            </span>
+            <span class="el-checkbox__label">全选</span>
+          </label>
+        </div>
       </el-select-menu>
     </transition>
   </div>
@@ -239,6 +253,14 @@
       },
       propPlaceholder() {
         return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
+      },
+
+      isSelectAllChecked() {
+        if (!this.multiple || !Array.isArray(this.value)) return false;
+        const allValues = this.getAvailableOptionsValues();
+        if (allValues.length === 0) return false;
+
+        return allValues.every(optionValue => this.getValueIndex(this.value, optionValue) > -1);
       }
     },
 
@@ -286,6 +308,10 @@
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
+      showSelectAll: {
+        type: Boolean,
+        default: false
+      },
       multipleLimit: {
         type: Number,
         default: 0
@@ -841,6 +867,27 @@
           return item.value;
         } else {
           return getValueByPath(item.value, this.valueKey);
+        }
+      },
+
+      getAvailableOptionsValues() {
+        return this.options
+          .filter(option => option && !option.disabled && !option.groupDisabled)
+          .map(option => option.value);
+      },
+
+      handleSelectAllChange() {
+        if (this.selectDisabled || !this.multiple) return;
+
+        const nextChecked = !this.isSelectAllChecked;
+        const value = nextChecked ? this.getAvailableOptionsValues() : [];
+
+        this.$emit('input', value);
+        this.emitChange(value);
+        this.$emit('select-all-changed', nextChecked);
+
+        if (this.filterable && this.$refs.input) {
+          this.$refs.input.focus();
         }
       }
     },

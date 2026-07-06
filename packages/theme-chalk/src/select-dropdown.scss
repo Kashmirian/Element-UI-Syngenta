@@ -60,3 +60,13 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+@include b(select-dropdown__actions) {
+  padding: 8px 20px;
+  border-top: 1px solid $--border-color-lighter;
+  line-height: 1;
+
+  .el-checkbox {
+    margin-right: 0;
+  }
+}
