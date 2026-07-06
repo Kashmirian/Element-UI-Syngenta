@@ -23,3 +23,12 @@ waiter.config.js
 build/bin/algolia-key.js
 .envrc
 .history/
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/element-ui/CopilotIndices/17.14.1681.23550/CodeChunks.db
+.vs/element-ui/CopilotIndices/17.14.1681.23550/SemanticSymbols.db
+.vs/element-ui/FileContentIndex/f6ddb356-feed-4cf5-b308-f78127884c92.vsidx
+.vs/element-ui/v17/.wsuo
+.vs/element-ui/v17/DocumentLayout.json
+.vs/element-ui/v17/workspaceFileList.bin
