@@ -32,3 +32,5 @@ build/bin/algolia-key.js
 .vs/element-ui/v17/.wsuo
 .vs/element-ui/v17/DocumentLayout.json
 .vs/element-ui/v17/workspaceFileList.bin
+/.vs/element-ui
+/.vs/slnx.sqlite-journal
